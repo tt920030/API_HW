@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3ibLlgXbJl05AwpK60IBpgx5SfmdtYR0&callback=initMap"></script>
+    <style>
+        #map {
+            width: 800px;
+            height: 600px;
+            margin: auto;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+
+    <script>
+
+        function initMap() {
+
+            const huashan = { lat: 25.04585038036665, lng: 121.5296578574386 };
+
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 18,
+                center: huashan,
+            });
+
+            const img = "img/placeholder.png";
+
+            for (let i = 0; i < locations.length; i++) {
+
+                const marker = new google.maps.Marker({
+
+                    position: locations[i],
+                    map: map,
+                    title: pos_name[i],
+                    icon: img
+                });
+
+                const infowindow = new google.maps.InfoWindow({
+                    content: pos_name[i],
+                    ariaLabel: pos_name[i],
+                });
+
+                marker.addListener("click", () => {
+                    infowindow.open({
+                        anchor: marker,
+                        map,
+                    });
+                });
+
+            }
+
+
+        }
+
+        const pos_name = ["華山1914文化創意產業園區" ,"阜杭豆漿", "忠泰美術館", "TibaMe (北商) 培訓中心", "國立臺北科技大學", "台北犁記"];
+        const locations = [
+            { lat: 25.04585038036665, lng: 121.5296578574386 },
+            { lat: 25.044917257208326, lng: 121.5246367624879 },
+            { lat: 25.044761735991564, lng: 121.53742553424267 },
+            { lat: 25.04367308195123, lng: 121.5251517465854 },
+            { lat: 25.04452845379654, lng: 121.53450729102346 },
+            { lat: 25.049038497576998, lng: 121.5343785449991 },
+
+        ];
+
+        window.initMap = initMap;
+    </script>
+</body>
+
+</html>

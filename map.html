@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google map</title>
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3ibLlgXbJl05AwpK60IBpgx5SfmdtYR0&callback=initMap">
+        </script>
+    <style>
+        #map {
+            width: 800px;
+            height: 600px;
+            margin: auto;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+
+    <script>
+
+        let map;
+
+        function initMap() {
+
+            const huashan = { lat: 25.044394670430943, lng: 121.52930731764388 };
+
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 18,
+                center: huashan,
+            });
+
+            const img = "img/placeholder.png";
+
+            const marker = new google.maps.Marker({
+                position: huashan,
+                map: map,
+                title: "華山1914文化創意產業園區",
+                icon: img
+            });
+
+            const infowindow = new google.maps.InfoWindow({
+                content: "很多展區空間大，逛起來也很舒服，每一次展覽的主題都不一樣，展區有分免費及需要收費二種，喜歡的朋友可以自行關注，是可以常常來的地方，也是親子家庭適合同遊的地方。",
+                ariaLabel: "huashan",
+            });
+
+            marker.addListener("click", () => {
+                infowindow.open({
+                    anchor: marker,
+                    map,
+                });
+            });
+        }
+
+        window.initMap = initMap;
+
+
+    </script>
+</body>
+
+</html>
